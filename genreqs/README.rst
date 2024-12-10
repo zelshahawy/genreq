@@ -23,5 +23,3 @@ A Python tool that automatically detects python packages used in a project and g
 * Documentation: https://genreqs.readthedocs.io.
 
 -------
-
-This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
