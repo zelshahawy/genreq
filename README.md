@@ -60,6 +60,11 @@ If your virtual environment is not named `venv` or `.venv`, you can specify its 
 ```bash
 genreqs --add-venv-name myenv
 ```
+### Specify Recursion Depth
+
+
+If you call `genreqs` on a directory, you have the option of speciying the recursion depth of your search by adding the `--depth` flag. Default is 4.
+
 
 ### Output Example
 

@@ -7,7 +7,7 @@ import typer
 
 app = typer.Typer()
 
-def parse_imports_from_files(filepaths):
+def parse_imports_from_files(filepaths: list[str]) -> set[str]:
     """
     Parse imports from Python files and return a set of top-level imported packages.
     """
@@ -33,7 +33,7 @@ def parse_imports_from_files(filepaths):
                     imported_packages.add(top_level)
     return imported_packages
 
-def get_installed_packages(pip_path):
+def get_installed_packages(pip_path: str) -> set[str]:
     """
     Use `pip freeze` in the specified virtual environment to get installed packages and versions.
     """
@@ -51,7 +51,7 @@ def get_installed_packages(pip_path):
         typer.echo(f"Error running pip freeze: {e.stderr}", err=True)
         return {}
 
-def find_python_files_recursively(max_depth=4):
+def find_python_files_recursively(max_depth=4: int) -> list[str]:
     """
     Recursively search the current directory and subdirectories (up to max_depth) for .py files.
     Ignore 'venv' and '.venv' directories.
