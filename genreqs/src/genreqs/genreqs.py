@@ -92,7 +92,8 @@ def find_virtual_env(custom_venv_name=None):
 @app.command()
 def main(
     files: list[str] = typer.Argument(None, help="Python files to analyze. If none provided, searches recursively."),
-    add_venv_name: str = typer.Option(None, "--add-venv-name", help="Specify a custom virtual environment directory name.")
+    add_venv_name: str = typer.Option(None, "--add-venv-name", help="Specify a custom virtual environment directory name."),
+    depth: int = typer.Option(4, "--depth", help="Specify your search depth starting from the parent directory.")
 ):
     """
     Analyze imports in Python files and generate a requirements.txt from installed packages that match those imports.
@@ -101,7 +102,7 @@ def main(
     if files:
         files_to_check = [f for f in files if f.endswith('.py') and os.path.isfile(f)]
     else:
-        files_to_check = find_python_files_recursively(max_depth=4)
+        files_to_check = find_python_files_recursively(depth)
 
     if not files_to_check:
         typer.echo("No Python files found.")
@@ -141,7 +142,7 @@ def main(
 
     # Identify installed but not imported packages
     imported_lower = {p.lower() for p in imported_packages}
-    unused = set(installed_packages.keys()) - imported_lower
+    unused = set(installed_packages.keys()) - imported_lower - {"genreqs"}
 
     if unused:
         typer.echo("The following packages are installed but not imported:")
