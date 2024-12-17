@@ -12,6 +12,7 @@
 - Generates a `requirements.txt` file with exact package versions.
 - Identifies and lists packages installed but not used in your project.
 - Supports specifying a custom virtual environment directory.
+- Can scan specific number of python file arguments or recurisvely searches the current directory. 
 
 ---
 
