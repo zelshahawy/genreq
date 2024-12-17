@@ -11,7 +11,8 @@ def parse_imports_from_files(filepaths: list[str]) -> set[str]:
     """
     Parse imports from Python files and return a set of top-level imported packages.
     """
-    imported_packages = set()
+    imported_packages: set[str] = set()
+    filepath: str
     for filepath in filepaths:
         if not os.path.isfile(filepath):
             continue
@@ -35,7 +36,7 @@ def parse_imports_from_files(filepaths: list[str]) -> set[str]:
 
 def get_installed_packages(pip_path: str) -> set[str]:
     """
-    Use `pip freeze` in the specified virtual environment to get installed packages and versions.
+    Given a pip path, detects all installed packages in a virutal environment.
     """
     try:
         result = subprocess.run([pip_path, "freeze"], stdout=subprocess.PIPE,
@@ -51,13 +52,13 @@ def get_installed_packages(pip_path: str) -> set[str]:
         typer.echo(f"Error running pip freeze: {e.stderr}", err=True)
         return {}
 
-def find_python_files_recursively(max_depth=4: int) -> list[str]:
+def find_python_files_recursively(max_depth: int = 4) -> list[str]:
     """
     Recursively search the current directory and subdirectories (up to max_depth) for .py files.
     Ignore 'venv' and '.venv' directories.
     """
-    python_files = []
-    start_dir = os.getcwd()
+    python_files: list[str] = []
+    start_dir: str = os.getcwd()
     queue = deque([(start_dir, 0)])
     ignored_dirs = {'venv', '.venv'}
     while queue:
@@ -72,7 +73,7 @@ def find_python_files_recursively(max_depth=4: int) -> list[str]:
                 python_files.append(os.path.join(current_dir, entry.name))
     return python_files
 
-def find_virtual_env(custom_venv_name=None):
+def find_virtual_env(custom_venv_name: str = None) -> str | None:
     """
     Locate the virtual environment. If custom_venv_name is given, use that; otherwise use 'venv' or '.venv'.
     """
@@ -97,7 +98,7 @@ def main(
 ):
     """
     Analyze imports in Python files and generate a requirements.txt from installed packages that match those imports.
-    Additionally, echo which packages are installed but not imported.
+    Additionally, echo which packages are installed but not imported, and those that are imported but not installed.
     """
     if files:
         files_to_check = [f for f in files if f.endswith('.py') and os.path.isfile(f)]
