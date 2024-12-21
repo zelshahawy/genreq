@@ -1,25 +1,11 @@
-=======
-genreqs
-=======
+# genreqs
 
+![Version](https://img.shields.io/pypi/v/genreqs.svg)
+[![Travis CI](https://img.shields.io/travis/zelshahawy/genreqs.svg)](https://travis-ci.com/zelshahawy/genreqs)
+[![Documentation Status](https://readthedocs.org/projects/genreqs/badge/?version=latest)](https://genreqs.readthedocs.io/en/latest/?version=latest)
 
-.. image:: https://img.shields.io/pypi/v/genreq.svg
-        :target: https://pypi.python.org/pypi/genreq
+A Python tool that automatically detects python packages used in a project and generates a `requirements.txt` file.
 
-.. image:: https://img.shields.io/travis/zelshahawy/genreq.svg
-        :target: https://travis-ci.com/zelshahawy/genreq
+- Free software: BSD license
+- Documentation: [https://genreqs.readthedocs.io](https://genreqs.readthedocs.io)
 
-.. image:: https://readthedocs.org/projects/genreq/badge/?version=latest
-        :target: https://genreq.readthedocs.io/en/latest/?version=latest
-        :alt: Documentation Status
-
-
-
-
-A Python tool that automatically detects python packages used in a project and generate a requirements.txt file
-
-
-* Free software: BSD license
-* Documentation: https://genreqs.readthedocs.io.
-
--------
