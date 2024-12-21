@@ -1,7 +1,7 @@
 
-# GenReqs
+# GenReq
 
-**GenReqs** is a Python tool that automatically detects the Python packages used in your project and generates a `requirements.txt` file. It also highlights packages installed in your virtual environment but not imported in your code, helping you keep your dependencies clean and manageable.
+**GenReq** is a Python tool that automatically detects the Python packages used in your project and generates a `requirements.txt` file. It also highlights packages installed in your virtual environment but not imported in your code, helping you keep your dependencies clean and manageable.
 
 ---
 

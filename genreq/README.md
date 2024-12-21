@@ -3,14 +3,14 @@ genreqs
 =======
 
 
-.. image:: https://img.shields.io/pypi/v/genreqs.svg
-        :target: https://pypi.python.org/pypi/genreqs
+.. image:: https://img.shields.io/pypi/v/genreq.svg
+        :target: https://pypi.python.org/pypi/genreq
 
-.. image:: https://img.shields.io/travis/zelshahawy/genreqs.svg
-        :target: https://travis-ci.com/zelshahawy/genreqs
+.. image:: https://img.shields.io/travis/zelshahawy/genreq.svg
+        :target: https://travis-ci.com/zelshahawy/genreq
 
-.. image:: https://readthedocs.org/projects/genreqs/badge/?version=latest
-        :target: https://genreqs.readthedocs.io/en/latest/?version=latest
+.. image:: https://readthedocs.org/projects/genreq/badge/?version=latest
+        :target: https://genreq.readthedocs.io/en/latest/?version=latest
         :alt: Documentation Status
 
 
