@@ -19,19 +19,19 @@
 ## Installation
 
 ### Using `pip`
-First, make sure you have Python 3.7 or later installed. Then, install `genreqs` using `pip`:
+First, make sure you have Python 3.7 or later installed. Then, install `genreq` using `pip`:
 
 ```bash
-pip install genreqs
+pip install genreq
 ```
 
 Alternatively, clone the repository and install the package locally:
 
 ```bash
-git clone https://github.com/zelshahawy/genreqs.git
-cd genreqs
+git clone https://github.com/zelshahawy/genreq.git
+cd genreq
 python -m build
-pip install dist/genreqs-*.whl
+pip install dist/genreq-*.whl
 ```
 
 ---
@@ -40,10 +40,10 @@ pip install dist/genreqs-*.whl
 
 ### Basic Usage
 
-Run `genreqs` to scan all `.py` files in the current directory and subdirectories (up to a depth of 4) and generate a `requirements.txt` file:
+Run `genreq` to scan all `.py` files in the current directory and subdirectories (up to a depth of 4) and generate a `requirements.txt` file:
 
 ```bash
-genreqs
+genreq
 ```
 
 ### Analyze Specific Files
@@ -51,7 +51,7 @@ genreqs
 You can analyze specific Python files by passing them as arguments:
 
 ```bash
-genreqs file1.py file2.py
+genreq file1.py file2.py
 ```
 
 ### Specify a Custom Virtual Environment
@@ -59,12 +59,12 @@ genreqs file1.py file2.py
 If your virtual environment is not named `venv` or `.venv`, you can specify its name using the `--add-venv-name` option:
 
 ```bash
-genreqs --add-venv-name myenv
+genreq --add-venv-name myenv
 ```
 ### Specify Recursion Depth
 
 
-If you call `genreqs` on a directory, you have the option of speciying the recursion depth of your search by adding the `--depth` flag. Default is 4.
+If you call `genreq` on a directory, you have the option of speciying the recursion depth of your search by adding the `--depth` flag. Default is 4.
 
 
 ### Output Example
@@ -90,8 +90,8 @@ To set up a local development environment:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/zelshahawy/genreqs.git
-   cd genreqs
+   git clone https://github.com/zelshahawy/genreq.git
+   cd genreq
    ```
 
 2. Create a virtual environment:
@@ -130,7 +130,7 @@ This project is licensed under the **BSD License**. See the [LICENSE](LICENSE) f
 
 ## Links
 
-- **GitHub Repository:** [https://github.com/zelshahawy/genreqs](https://github.com/zelshahawy/genreqs)
+- **GitHub Repository:** [https://github.com/zelshahawy/genreq](https://github.com/zelshahawy/genreqs)
 - **Report Issues:** [https://github.com/zelshahawy/genreqs/issues](https://github.com/zelshahawy/genreqs/issues)
 
 ---
