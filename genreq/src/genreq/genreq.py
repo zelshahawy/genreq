@@ -26,7 +26,7 @@ def parse_imports_from_files(filepaths: list[str]) -> set[str]:
         for node in ast.walk(tree):
             if isinstance(node, ast.Import):
                 for n in node.names:
-                    top_level = n.name.split('.')[0]
+                    top_level: list[str] = n.name.split('.')[0]
                     imported_packages.add(top_level)
             elif isinstance(node, ast.ImportFrom):
                 if node.module is not None:
@@ -39,10 +39,10 @@ def get_installed_packages(pip_path: str) -> set[str]:
     Given a pip path, detects all installed packages in a virutal environment.
     """
     try:
-        result = subprocess.run([pip_path, "freeze"], stdout=subprocess.PIPE,
+        result: int = subprocess.run([pip_path, "freeze"], stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE, text=True, check=True)
-        lines = result.stdout.strip().split('\n')
-        installed = {}
+        lines: list[str] = result.stdout.strip().split('\n')
+        installed: set[str] = {}
         for line in lines:
             if '==' in line:
                 pkg, _ = line.split('==', 1)
@@ -60,9 +60,11 @@ def find_python_files_recursively(max_depth: int = 4) -> list[str]:
     python_files: list[str] = []
     start_dir: str = os.getcwd()
     queue = deque([(start_dir, 0)])
-    ignored_dirs = {'venv', '.venv'}
+    ignored_dirs: set[str] = {'venv', '.venv'}
     while queue:
-        current_dir, depth = queue.popleft()
+        current_dir: str
+        depth: int
+        current_dir, depth  = queue.popleft()
         if depth > max_depth:
             continue
         for entry in os.scandir(current_dir):
@@ -142,8 +144,8 @@ def main(
     typer.echo("requirements.txt has been generated.")
 
     # Identify installed but not imported packages
-    imported_lower = {p.lower() for p in imported_packages}
-    unused = set(installed_packages.keys()) - imported_lower - {"genreqs"}
+    imported_lower: set[str] = {p.lower() for p in imported_packages}
+    unused: set[str] = set(installed_packages.keys()) - imported_lower - {"genreqs"}
 
     if unused:
         typer.echo("The following packages are installed but not imported:")
