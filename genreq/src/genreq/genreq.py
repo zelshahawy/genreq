@@ -26,7 +26,7 @@ def parse_imports_from_files(filepaths: list[str]) -> set[str]:
         for node in ast.walk(tree):
             if isinstance(node, ast.Import):
                 for n in node.names:
-                    top_level: list[str] = n.name.split('.')[0]
+                    top_level: str = n.name.split('.')[0]
                     imported_packages.add(top_level)
             elif isinstance(node, ast.ImportFrom):
                 if node.module is not None:
