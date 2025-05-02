@@ -127,28 +127,35 @@ def main(
         sys.exit(0)
 
     installed_packages = get_installed_packages(pip_path)
-    matched_requirements = []
+    matched_requirements: list[str] = []
+    unmatched_imports: list[str] = []
     for pkg in sorted(imported_packages):
-        pkg_lower = pkg.lower()
-        if pkg_lower in installed_packages:
-            matched_requirements.append(installed_packages[pkg_lower])
+        if pkg.lower() in installed_packages:
+            matched_requirements.append(installed_packages[pkg.lower()])
         else:
-            typer.echo(f"Warning: Imported package '{pkg}' not found in \
-                installed packages.", err=True)
+            unmatched_imports.append(pkg)
+            typer.echo(f"Warning: Package '{pkg}' is imported but not installed. USE ALLOW_PCKS = 1 env variable to include it in requirements.txt.")
+            
 
     # Write matched packages to requirements.txt
     with open("requirements.txt", "w", encoding="utf-8") as req_file:
         for line in matched_requirements:
             req_file.write(line + "\n")
+        if unmatched_imports:
+            if os.getenv("ALLOW_PCKS") == "1":
+                for pkg in unmatched_imports:
+                    req_file.write(f"{pkg}\n")
 
     typer.echo("requirements.txt has been generated.")
+    
+    
 
     # Identify installed but not imported packages
     imported_lower: set[str] = {p.lower() for p in imported_packages}
-    unused: set[str] = set(installed_packages.keys()) - imported_lower - {"genreqs"}
+    unused: set[str] = set(installed_packages.keys()) - imported_lower - {"genreq"}
 
     if unused:
-        typer.echo("The following packages are installed but not imported:")
+        typer.echo("The following packages are installed but not directly imported in any of your files:")
         for pkg in sorted(unused):
             typer.echo(pkg)
 

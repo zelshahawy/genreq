@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "genreq"
-version = "0.1.1"
+version = "0.2.0"
 description = "A Python tool that automatically detects python packages used in a project and generate a requirements.txt file"
 readme = "README.md"
 authors = [
@@ -31,9 +31,9 @@ dev = [
 
 [project.urls]
 
-bugs = "https://github.com/zelshahawy/genreqs/issues"
-changelog = "https://github.com/zelshahawy/genreqs/blob/master/changelog.md"
-homepage = "https://github.com/zelshahawy/genreqs"
+bugs = "https://github.com/zelshahawy/genreq/issues"
+changelog = "https://github.com/zelshahawy/genreq/blob/master/changelog.md"
+homepage = "https://github.com/zelshahawy/genreq"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
@@ -62,6 +62,6 @@ allow_untyped_defs = true
 disable_error_code = "attr-defined"
 
 [project.scripts]
-genreqs = "genreqs.genreqs:app"
+genreq = "genreq.genreq:app"
 
 
