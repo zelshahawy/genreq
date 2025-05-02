@@ -2,8 +2,10 @@ import os
 import sys
 import ast
 import subprocess
+from subprocess import CompletedProcess
 from collections import deque
 import typer
+from typing import Optional
 
 app = typer.Typer()
 
@@ -34,15 +36,15 @@ def parse_imports_from_files(filepaths: list[str]) -> set[str]:
                     imported_packages.add(top_level)
     return imported_packages
 
-def get_installed_packages(pip_path: str) -> set[str]:
+def get_installed_packages(pip_path: str) -> dict[str, str]:
     """
     Given a pip path, detects all installed packages in a virutal environment.
     """
     try:
-        result: int = subprocess.run([pip_path, "freeze"], stdout=subprocess.PIPE,
+        result: CompletedProcess[str] = subprocess.run([pip_path, "freeze"], stdout=subprocess.PIPE,
                                 stderr=subprocess.PIPE, text=True, check=True)
         lines: list[str] = result.stdout.strip().split('\n')
-        installed: set[str] = {}
+        installed: dict[str, str] = {}
         for line in lines:
             if '==' in line:
                 pkg, _ = line.split('==', 1)
@@ -75,7 +77,7 @@ def find_python_files_recursively(max_depth: int = 4) -> list[str]:
                 python_files.append(os.path.join(current_dir, entry.name))
     return python_files
 
-def find_virtual_env(custom_venv_name: str = None) -> str | None:
+def find_virtual_env(custom_venv_name: Optional[str]) -> Optional[str] :
     """
     Locate the virtual environment. If custom_venv_name is given, use that; otherwise use 'venv' or '.venv'.
     """
