@@ -17,9 +17,7 @@ classifiers = [
 
 ]
 license = {text = "BSD license"}
-dependencies = [
-  "typer"
-]
+dependencies = []
 
 [project.optional-dependencies]
 dev = [
