@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "genreq"
-version = "0.2.1"
+version = "1.0.0"
 description = "A Python tool that automatically detects python packages used in a project and generate a requirements.txt file"
 readme = "README.md"
 authors = [
@@ -17,9 +17,7 @@ classifiers = [
 
 ]
 license = {text = "BSD license"}
-dependencies = [
-  "typer"
-]
+dependencies = []
 
 [project.optional-dependencies]
 dev = [
