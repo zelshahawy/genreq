@@ -1,4 +1,4 @@
-from genreq.genreq import app
+from genreq.genreq import main
 
 if __name__ == "__main__":
-    app()
+    main()
