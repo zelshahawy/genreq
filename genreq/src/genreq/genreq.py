@@ -6,6 +6,20 @@ from subprocess import CompletedProcess
 from collections import deque
 import argparse
 from typing import Optional
+import importlib.util
+import sysconfig
+
+def is_std_lib(module_name: str) -> bool:
+    """
+    Return True if module_name is part of the stdlib (builtin or stdlib path).
+    """
+    if module_name in sys.builtin_module_names:
+        return True
+    spec = importlib.util.find_spec(module_name)
+    if not spec or not spec.origin:
+        return False
+    stdlib_dir = sysconfig.get_paths()['stdlib']
+    return spec.origin.startswith(stdlib_dir)
 
 def parse_imports_from_files(filepaths: list[str]) -> set[str]:
     """
@@ -123,6 +137,11 @@ def main():
         sys.exit(1)
 
     imported_packages = parse_imports_from_files(files_to_check)
+    imported_packages = filter(
+        lambda pkg: not is_std_lib(pkg) and pkg not in {"genreq", "__main__"},
+        imported_packages
+    )
+
     if not imported_packages:
         print("No external packages imported.")
         open("requirements.txt", "w", encoding="utf-8").close()
@@ -138,7 +157,7 @@ def main():
         else:
             unmatched_imports.append(pkg)
             print(
-                f"Warning: Package '{pkg}' is imported but not installed. "
+                f"Warning: Package '{pkg}' is imported but not installed\n. "
                 "Set ALLOW_PKGS=1 to include it in requirements.txt."
             )
 
@@ -154,7 +173,7 @@ def main():
     imported_lower = {p.lower() for p in imported_packages}
     unused = set(installed_packages.keys()) - imported_lower - {"genreq"}
     if unused:
-        print("The following packages are installed but not directly imported:")
+        print("\nThe following packages are installed but not directly imported:")
         for pkg in sorted(unused):
             print(pkg)
 
