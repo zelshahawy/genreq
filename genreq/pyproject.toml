@@ -10,6 +10,8 @@ readme = "README.md"
 authors = [
   {name = "Ziad Elshahawy", email = "zelshahawy@uchicago.edu"}
 ]
+requires-python = ">=3.11"
+
 maintainers = [
   {name = "Ziad Elshahawy", email = "zelshahawy@uchicago.edu"}
 ]
